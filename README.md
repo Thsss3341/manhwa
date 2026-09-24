@@ -4,7 +4,12 @@ A personal [Mihon](https://mihon.app) extension repository.
 
 | Extension | Language | Site |
 |-----------|----------|------|
-| 古古漫画 (`zh.gugu5`) — in progress | zh | https://m.gugu5.com |
+| 古古漫画 (`zh.gugu5`) | zh | http://www.gugu5.cc |
+
+古古漫画 is a directory site. Depending on the manga, its chapter list links either to its own
+reader or to the partner site 漫画大全 (`m.yueman1.cc`); the extension reads each chapter from
+wherever it is hosted. Manga whose chapters only link to official third-party sites (e.g. 腾讯动漫
+`ac.qq.com`) show no chapters and say so in their description.
 
 ## Adding the repo in Mihon
 
