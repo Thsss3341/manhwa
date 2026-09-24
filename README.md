@@ -4,7 +4,7 @@ A personal [Mihon](https://mihon.app) extension repository.
 
 | Extension | Language | Site |
 |-----------|----------|------|
-| 漫画160 (`zh.mh160`) | zh | https://www.mh160mh.com |
+| 古古漫画 (`zh.gugu5`) — in progress | zh | https://m.gugu5.com |
 
 ## Adding the repo in Mihon
 
@@ -55,22 +55,23 @@ Also make sure **Settings → Actions → General → Workflow permissions** all
 Building needs JDK 21+ and the Android SDK (`ANDROID_HOME` or `local.properties` with `sdk.dir`).
 
 ```bash
-./gradlew :src:zh:mh160:assembleDebug     # build one extension
-./gradlew :src:zh:mh160:lintRelease       # lint it
+./gradlew :src:zh:gugu5:assembleDebug     # build one extension
+./gradlew :src:zh:gugu5:lintRelease       # lint it
 ```
 
 To load only the modules you are working on, edit the bottom of
 [settings.gradle.kts](settings.gradle.kts).
 
-To add a new extension, create `src/<lang>/<name>/` with a `build.gradle.kts` (see
-[the mh160 one](src/zh/mh160/build.gradle.kts)), launcher icons under `res/mipmap-*/ic_launcher.png`
-and a class annotated with `@Source` that extends `KeiSource`.
+To add a new extension, create `src/<lang>/<name>/` with a `build.gradle.kts`, launcher icons under
+`res/mipmap-*/ic_launcher.png` and a class annotated with `@Source` that extends `KeiSource`. The
+[Keiyoushi contributing guide](https://github.com/keiyoushi/extensions-source/blob/main/CONTRIBUTING.md)
+documents the `keiyoushi { }` build DSL and the `KeiSource` API used here.
 
 ## Credits
 
-The build tooling (`gradle/`, `core/`, `compiler/`, `common/`) and the 漫画160 source are adapted
-from [keiyoushi/extensions-source](https://github.com/keiyoushi/extensions-source), licensed under
-the Apache License 2.0 (see [LICENSE-APACHE](LICENSE-APACHE)). Everything else is under the
+The build tooling (`gradle/`, `core/`, `compiler/`, `common/`) is adapted from
+[keiyoushi/extensions-source](https://github.com/keiyoushi/extensions-source), licensed under the
+Apache License 2.0 (see [LICENSE-APACHE](LICENSE-APACHE)). Everything else is under the
 [MIT License](LICENSE).
 
 This project is not affiliated with Mihon or with the content providers available.

@@ -34,7 +34,7 @@ rootProject.name = "Manhwa"
  * Add or remove modules to load as needed for local development here.
  */
 loadAllIndividualExtensions()
-// loadIndividualExtension("zh", "mh160")
+// loadIndividualExtension("zh", "gugu5")
 
 /**
  * ===================================== COMMON CONFIGURATION ======================================
