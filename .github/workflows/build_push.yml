@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**'
+      - '!**.md'
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and publish extension repo
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: main
+          persist-credentials: false
+
+      - name: Set up Java
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          java-version: 25
+          distribution: temurin
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+
+      - name: Prepare signing key
+        env:
+          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+        run: |
+          if [ -z "$SIGNING_KEY" ]; then
+            echo "::error::The SIGNING_KEY secret is not set. See README.md for how to create one."
+            exit 1
+          fi
+          echo "$SIGNING_KEY" | base64 -d > main/signingkey.jks
+
+      - name: Build extensions
+        working-directory: main
+        env:
+          ALIAS: ${{ secrets.ALIAS }}
+          KEY_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew assembleRelease
+
+      - name: Read signing certificate fingerprint
+        id: fingerprint
+        run: |
+          APKSIGNER=$(ls -d "$ANDROID_HOME"/build-tools/*/apksigner | sort -V | tail -n 1)
+          APK=$(ls main/src/*/*/build/outputs/apk/release/*.apk | head -n 1)
+          FINGERPRINT=$("$APKSIGNER" verify --print-certs "$APK" | grep -m 1 'certificate SHA-256 digest' | awk '{print $NF}')
+          echo "Signing key fingerprint: $FINGERPRINT"
+          echo "value=$FINGERPRINT" >> "$GITHUB_OUTPUT"
+
+      - name: Check out repo branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          REMOTE="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$REMOTE" repo > /dev/null; then
+            git clone --depth 1 --branch repo "$REMOTE" repo
+          else
+            git init -b repo repo
+            git -C repo remote add origin "$REMOTE"
+          fi
+
+      - name: Generate repo index
+        working-directory: repo
+        env:
+          FINGERPRINT: ${{ steps.fingerprint.outputs.value }}
+        run: |
+          pip install "protobuf>=7.35.1"
+          python ../main/.github/scripts/publish-repo.py ../main/src "$FINGERPRINT"
+
+      - name: Push repo branch
+        working-directory: repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to publish"
+            exit 0
+          fi
+          git commit -m "Update extensions repo from ${GITHUB_SHA::7}"
+          git push origin HEAD:repo
+
+      - name: Clean up signing key
+        if: always()
+        run: rm -f main/signingkey.jks
