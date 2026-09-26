@@ -5,11 +5,17 @@ A personal [Mihon](https://mihon.app) extension repository.
 | Extension | Language | Site |
 |-----------|----------|------|
 | 古古漫画 (`zh.gugu5`) | zh | http://www.gugu5.cc |
+| 漫画大全 (`zh.yueman`) | zh | http://m.yueman1.cc |
 
 古古漫画 is a directory site. Depending on the manga, its chapter list links either to its own
 reader or to the partner site 漫画大全 (`m.yueman1.cc`); the extension reads each chapter from
 wherever it is hosted. Manga whose chapters only link to official third-party sites (e.g. 腾讯动漫
 `ac.qq.com`) show no chapters and say so in their description.
+
+漫画大全 publishes its current domains at http://reman.cc; if the site moves, change the base URL in
+the extension's settings. Its own search is disabled, so keyword search goes through 古古漫画 and
+only finds titles listed there; browse by category, or paste a 漫画大全 / 古古漫画 manga link into
+the search box, to reach anything else.
 
 ## Adding the repo in Mihon
 
