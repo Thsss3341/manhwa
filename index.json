@@ -1,0 +1,33 @@
+{
+  "name": "Manhwa",
+  "badgeLabel": "MHW",
+  "signingKey": "a3f8c98e0cb3c37927bd71e3669973dee6699f6b4c1c2a78e5a83a1adbad02ae",
+  "contact": {
+    "website": "https://github.com/Thsss3341/manhwa"
+  },
+  "extensionList": {
+    "extensions": [
+      {
+        "name": "Gugu5",
+        "packageName": "eu.kanade.tachiyomi.extension.zh.gugu5",
+        "resources": {
+          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/apk/tachiyomi-zh.gugu5-v1.6.1.apk",
+          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/icon/eu.kanade.tachiyomi.extension.zh.gugu5.png",
+          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/jar/tachiyomi-zh.gugu5-v1.6.1.jar"
+        },
+        "extensionLib": "1.6",
+        "versionCode": "106001",
+        "versionName": "1.6.1",
+        "contentWarning": "CONTENT_WARNING_SAFE",
+        "sources": [
+          {
+            "id": "6823712755632349824",
+            "name": "古古漫画",
+            "language": "zh",
+            "homeUrl": "http://www.gugu5.cc"
+          }
+        ]
+      }
+    ]
+  }
+}
