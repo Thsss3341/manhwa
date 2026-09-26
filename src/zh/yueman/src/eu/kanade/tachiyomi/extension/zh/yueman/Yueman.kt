@@ -180,7 +180,9 @@ abstract class Yueman : KeiSource() {
     // Mirrors f_qTcms_Pic_curUrl_realpic() in the site's show.js, which moves images off dead hosts.
     private fun realImageUrl(url: String): String {
         val rewritten = IMAGE_HOST_REWRITES.fold(url) { acc, (from, to) -> acc.replace(from, to) }
-        return SCOMIC_REGEX.replace(rewritten, "https://p8.taoman.cc$1")
+        val scomic = SCOMIC_REGEX.replace(rewritten, "https://p8.taoman.cc$1")
+        // show.js maps these to a mistyped host; the files live on gmh1234 as .webp.
+        return WSZWHG_JPG_REGEX.replace(WSZWHG_HOST_REGEX.replace(scomic, "//gmh1234.wszwhg.net/"), "$1.webp")
     }
 
     // yueman pages declare GB2312 but may contain GBK-only characters; gugu5 pages are UTF-8 or GB2312.
@@ -219,6 +221,8 @@ abstract class Yueman : KeiSource() {
             "http://f2-img.534zm.com" to "https://t2.taoman.cc",
         )
         private val SCOMIC_REGEX = Regex("""https://s[12]\.[^/]+(/scomic/)""")
+        private val WSZWHG_HOST_REGEX = Regex("""//(?:images|gmh1234)\.wszwhg\.net/""")
+        private val WSZWHG_JPG_REGEX = Regex("""(wszwhg\.net/[^?#]*)\.jpg(?=[?#]|$)""", RegexOption.IGNORE_CASE)
         private val IMAGE_LIST_REGEX = Regex("""qTcms_S_m_murl_e\s*=\s*"([^"]+)"""")
         private val GBK = Charset.forName("GBK")
         private val GB_CHARSET_REGEX = Regex("""charset\s*=\s*"?(gb2312|gbk)""", RegexOption.IGNORE_CASE)
