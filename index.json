@@ -11,13 +11,13 @@
         "name": "Gugu5",
         "packageName": "eu.kanade.tachiyomi.extension.zh.gugu5",
         "resources": {
-          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/apk/tachiyomi-zh.gugu5-v1.6.1.apk",
+          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/apk/tachiyomi-zh.gugu5-v1.6.2.apk",
           "iconUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/icon/eu.kanade.tachiyomi.extension.zh.gugu5.png",
-          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/jar/tachiyomi-zh.gugu5-v1.6.1.jar"
+          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/jar/tachiyomi-zh.gugu5-v1.6.2.jar"
         },
         "extensionLib": "1.6",
-        "versionCode": "106001",
-        "versionName": "1.6.1",
+        "versionCode": "106002",
+        "versionName": "1.6.2",
         "contentWarning": "CONTENT_WARNING_SAFE",
         "sources": [
           {
@@ -25,6 +25,27 @@
             "name": "古古漫画",
             "language": "zh",
             "homeUrl": "http://www.gugu5.cc"
+          }
+        ]
+      },
+      {
+        "name": "Yueman",
+        "packageName": "eu.kanade.tachiyomi.extension.zh.yueman",
+        "resources": {
+          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/apk/tachiyomi-zh.yueman-v1.6.1.apk",
+          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/icon/eu.kanade.tachiyomi.extension.zh.yueman.png",
+          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/jar/tachiyomi-zh.yueman-v1.6.1.jar"
+        },
+        "extensionLib": "1.6",
+        "versionCode": "106001",
+        "versionName": "1.6.1",
+        "contentWarning": "CONTENT_WARNING_SAFE",
+        "sources": [
+          {
+            "id": "6318419290037862216",
+            "name": "漫画大全",
+            "language": "zh",
+            "homeUrl": "http://m.yueman1.cc"
           }
         ]
       }
