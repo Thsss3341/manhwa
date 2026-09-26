@@ -137,8 +137,15 @@ abstract class Gugu5 : KeiSource() {
             ?: throw Exception("找不到图片列表，页面结构可能已更改")
         val decoded = String(Base64.decode(encoded, Base64.DEFAULT), Charsets.UTF_8)
         return decoded.split(IMAGE_SEPARATOR)
-            .filter { it.isNotBlank() }
-            .mapIndexed { index, imageUrl -> Page(index, imageUrl = imageUrl.trim()) }
+            .map { it.trim() }
+            .filter { it.isNotEmpty() && !it.endsWith(PROMO_IMAGE) }
+            .mapIndexed { index, imageUrl -> Page(index, imageUrl = realImageUrl(imageUrl)) }
+    }
+
+    // Mirrors f_qTcms_Pic_curUrl_realpic() in the site's show.js, which moves images off dead hosts.
+    private fun realImageUrl(url: String): String {
+        val rewritten = IMAGE_HOST_REWRITES.fold(url) { acc, (from, to) -> acc.replace(from, to) }
+        return SCOMIC_REGEX.replace(rewritten, "https://p8.taoman.cc$1")
     }
 
     // Newer pages are UTF-8 (with BOM) while legacy pages and the reader declare GB2312 in a meta tag
@@ -158,9 +165,23 @@ abstract class Gugu5 : KeiSource() {
         private const val CHAPTER_LINK_SELECTOR = "ul[id^=mh-chapter-list-ol] li a, #play_0 ul li a"
         private const val YUEMAN_URL = "http://m.yueman1.cc"
         private const val IMAGE_SEPARATOR = "\$qingtiandy\$"
+
+        // "Please bookmark reman.cc" banner appended to some chapters.
+        private const val PROMO_IMAGE = "reman.cc/reman.jpg"
         private const val EXTERNAL_ONLY_NOTICE = "※ 本漫画的章节只链接到第三方网站（如腾讯动漫），无法在此阅读。"
         private val MANGA_PATH_REGEX = Regex("""^/o/([^/]+)/?""")
         private val CHAPTER_PATH_REGEX = Regex("""/[pn]/\d+/\d+\.html""")
+        private val IMAGE_HOST_REWRITES = listOf(
+            "http://ltpic.sfacg.com" to "http://pic3.sfacg.com",
+            "http://mhpic" to "http://t2.taoman.cc/t.php?url=http://mhpic",
+            "http://t1.taoman.cc/pic/" to "https://p8.taoman.cc/qTcms_Cache/picls/",
+            "http://t1.taoman.cc/picls/" to "https://p8.taoman.cc/qTcms_Cache/picls/",
+            "http://t1.reman.cc/pic/" to "https://p8.taoman.cc/qTcms_Cache/picls/",
+            "https://t40-1-4.g-mh.online" to "https://t2.taoman.cc",
+            "https://c-nd3-1.6wm.top" to "https://t2.taoman.cc",
+            "http://f2-img.534zm.com" to "https://t2.taoman.cc",
+        )
+        private val SCOMIC_REGEX = Regex("""https://s[12]\.[^/]+(/scomic/)""")
         private val IMAGE_LIST_REGEX = Regex("""qTcms_S_m_murl_e\s*=\s*"([^"]+)"""")
         private val GBK = Charset.forName("GBK")
         private val GB_CHARSET_REGEX = Regex("""charset\s*=\s*"?(gb2312|gbk)""", RegexOption.IGNORE_CASE)
