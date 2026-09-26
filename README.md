@@ -13,9 +13,11 @@ wherever it is hosted. Manga whose chapters only link to official third-party si
 `ac.qq.com`) show no chapters and say so in their description.
 
 漫画大全 publishes its current domains at http://reman.cc; if the site moves, change the base URL in
-the extension's settings. Its own search is disabled, so keyword search goes through 古古漫画 and
-only finds titles listed there; browse by category, or paste a 漫画大全 / 古古漫画 manga link into
-the search box, to reach anything else.
+the extension's settings. Its own search is disabled, so the extension searches an index of the
+whole catalogue instead: the [Search index workflow](.github/workflows/search_index.yml) crawls the
+site's category listings daily and publishes `yueman.tsv` on the `search` branch. Pasting a 漫画大全
+or 古古漫画 manga link into the search box also works. Both sites share the same catalogue, so use
+漫画大全 to search for titles that 古古漫画's own search misses.
 
 ## Adding the repo in Mihon
 
