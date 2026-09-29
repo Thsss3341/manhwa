@@ -2,8 +2,7 @@ package eu.kanade.tachiyomi.extension.zh.hipmh
 
 import eu.kanade.tachiyomi.source.model.Filter
 
-open class QueryFilter(name: String, private val options: List<Pair<String, String?>>, default: Int = 0) :
-    Filter.Select<String>(name, options.map { it.first }.toTypedArray(), default) {
+open class QueryFilter(name: String, private val options: List<Pair<String, String?>>, default: Int = 0) : Filter.Select<String>(name, options.map { it.first }.toTypedArray(), default) {
     val selected: String? get() = options[state].second
 }
 
