@@ -6,6 +6,7 @@ A personal [Mihon](https://mihon.app) extension repository.
 |-----------|----------|------|
 | 古古漫画 (`zh.gugu5`) | zh | http://www.gugu5.cc |
 | 漫画大全 (`zh.yueman`) | zh | http://m.yueman1.cc |
+| 嬉皮漫画 (`zh.hipmh`) | zh | https://m.hipmh.com |
 
 古古漫画 is a directory site. Depending on the manga, its chapter list links either to its own
 reader or to the partner site 漫画大全 (`m.yueman1.cc`); the extension reads each chapter from
@@ -18,6 +19,12 @@ whole catalogue instead: the [Search index workflow](.github/workflows/search_in
 site's category listings daily and publishes `yueman.tsv` on the `search` branch. Pasting a 漫画大全
 or 古古漫画 manga link into the search box also works. Both sites share the same catalogue, so use
 漫画大全 to search for titles that 古古漫画's own search misses.
+
+古古漫画, 漫画大全 and mh160 all serve the same re-hosted image sets, which are sometimes missing
+panels or cut pages short. 嬉皮漫画 carries images taken directly from the official platforms
+(快看漫画, 腾讯动漫, webtoon, ...), so use it when a chapter from the other sources is incomplete.
+Its chapter lists can lag behind by a few hours because the site's API caches them; the extension
+follows each chapter's "next chapter" link to find chapters the cached list doesn't show yet.
 
 ## Adding the repo in Mihon
 
