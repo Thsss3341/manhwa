@@ -24,8 +24,8 @@ REPO_NAME = os.environ["GITHUB_REPOSITORY"]
 REPO_BRANCH = "repo"
 RAW_BASE_URL = f"https://raw.githubusercontent.com/{REPO_NAME}/{REPO_BRANCH}"
 
-INDEX_NAME = "Manhwa"
-INDEX_BADGE = "MHW"
+INDEX_NAME = "Ths Manhua"
+INDEX_BADGE = "THS"
 WEBSITE = f"https://github.com/{REPO_NAME}"
 
 SOURCE_DIR = Path(__file__).resolve().parents[2]

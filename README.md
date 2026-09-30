@@ -1,4 +1,4 @@
-# Manhwa extensions
+# Ths Manhua
 
 A personal [Mihon](https://mihon.app) extension repository.
 
@@ -31,7 +31,7 @@ follows each chapter's "next chapter" link to find chapters the cached list does
 In Mihon go to **Browse → Extensions → Extension repos → Add** and paste:
 
 ```
-https://raw.githubusercontent.com/Thsss3341/manhwa/repo/index.pb
+https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/index.pb
 ```
 
 Mihon can only fetch the index if this GitHub repository is **public**.
