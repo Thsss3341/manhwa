@@ -268,7 +268,7 @@ abstract class Yueman : KeiSource() {
         private const val GUGU5_HOST = "gugu5.cc"
         private const val GUGU5_URL = "http://www.gugu5.cc"
         private const val GUGU5_CHAPTER_LINK_SELECTOR = "ul[id^=mh-chapter-list-ol] li a, #play_0 ul li a"
-        private const val SEARCH_INDEX_URL = "https://raw.githubusercontent.com/Thsss3341/manhwa/search/yueman.tsv"
+        private const val SEARCH_INDEX_URL = "https://raw.githubusercontent.com/Thsss3341/ths-manhua/search/yueman.tsv"
         private const val SEARCH_INDEX_TTL_MS = 6 * 60 * 60 * 1000L
         private const val SEARCH_PAGE_SIZE = 50
         private const val COVER_HOST = "http://www.yueman1.cc"
