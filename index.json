@@ -1,9 +1,9 @@
 {
-  "name": "Manhwa",
-  "badgeLabel": "MHW",
+  "name": "Ths Manhua",
+  "badgeLabel": "THS",
   "signingKey": "a3f8c98e0cb3c37927bd71e3669973dee6699f6b4c1c2a78e5a83a1adbad02ae",
   "contact": {
-    "website": "https://github.com/Thsss3341/manhwa"
+    "website": "https://github.com/Thsss3341/ths-manhua"
   },
   "extensionList": {
     "extensions": [
@@ -11,9 +11,9 @@
         "name": "Gugu5",
         "packageName": "eu.kanade.tachiyomi.extension.zh.gugu5",
         "resources": {
-          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/apk/tachiyomi-zh.gugu5-v1.6.3.apk",
-          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/icon/eu.kanade.tachiyomi.extension.zh.gugu5.png",
-          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/jar/tachiyomi-zh.gugu5-v1.6.3.jar"
+          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/apk/tachiyomi-zh.gugu5-v1.6.3.apk",
+          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/icon/eu.kanade.tachiyomi.extension.zh.gugu5.png",
+          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/jar/tachiyomi-zh.gugu5-v1.6.3.jar"
         },
         "extensionLib": "1.6",
         "versionCode": "106003",
@@ -32,9 +32,9 @@
         "name": "Hipmh",
         "packageName": "eu.kanade.tachiyomi.extension.zh.hipmh",
         "resources": {
-          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/apk/tachiyomi-zh.hipmh-v1.6.1.apk",
-          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/icon/eu.kanade.tachiyomi.extension.zh.hipmh.png",
-          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/jar/tachiyomi-zh.hipmh-v1.6.1.jar"
+          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/apk/tachiyomi-zh.hipmh-v1.6.1.apk",
+          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/icon/eu.kanade.tachiyomi.extension.zh.hipmh.png",
+          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/jar/tachiyomi-zh.hipmh-v1.6.1.jar"
         },
         "extensionLib": "1.6",
         "versionCode": "106001",
@@ -53,13 +53,13 @@
         "name": "Yueman",
         "packageName": "eu.kanade.tachiyomi.extension.zh.yueman",
         "resources": {
-          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/apk/tachiyomi-zh.yueman-v1.6.3.apk",
-          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/icon/eu.kanade.tachiyomi.extension.zh.yueman.png",
-          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/manhwa/repo/jar/tachiyomi-zh.yueman-v1.6.3.jar"
+          "apkUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/apk/tachiyomi-zh.yueman-v1.6.4.apk",
+          "iconUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/icon/eu.kanade.tachiyomi.extension.zh.yueman.png",
+          "jarUrl": "https://raw.githubusercontent.com/Thsss3341/ths-manhua/repo/jar/tachiyomi-zh.yueman-v1.6.4.jar"
         },
         "extensionLib": "1.6",
-        "versionCode": "106003",
-        "versionName": "1.6.3",
+        "versionCode": "106004",
+        "versionName": "1.6.4",
         "contentWarning": "CONTENT_WARNING_SAFE",
         "sources": [
           {
