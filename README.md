@@ -7,6 +7,7 @@ A personal [Mihon](https://mihon.app) extension repository.
 | 古古漫画 (`zh.gugu5`) | zh | http://www.gugu5.cc |
 | 漫画大全 (`zh.yueman`) | zh | http://m.yueman1.cc |
 | 嬉皮漫画 (`zh.hipmh`) | zh | https://m.hipmh.com |
+| 漫画柜 (`zh.manhuaguiths`) | zh | https://www.manhuagui.com |
 
 古古漫画 is a directory site. Depending on the manga, its chapter list links either to its own
 reader or to the partner site 漫画大全 (`m.yueman1.cc`); the extension reads each chapter from
@@ -25,6 +26,13 @@ panels or cut pages short. 嬉皮漫画 carries images taken directly from the o
 (快看漫画, 腾讯动漫, webtoon, ...), so use it when a chapter from the other sources is incomplete.
 Its chapter lists can lag behind by a few hours because the site's API caches them; the extension
 follows each chapter's "next chapter" link to find chapters the cached list doesn't show yet.
+
+漫画柜 is Keiyoushi's ManHuaGui extension with one change: each chapter is labelled with the
+section it belongs to on the site (单话, 单行本, 番外篇, ...) in the scanlator field. The label shows
+under every chapter, and the chapter list's filter (scanlators) can hide whole sections. When a manga
+has a 话 section, volumes and extras get no chapter number, so 第16卷 isn't taken for chapter 16 by
+trackers. It keeps the same source id as Keiyoushi's build, so uninstall that one first;
+library entries carry over.
 
 ## Adding the repo in Mihon
 
@@ -89,7 +97,8 @@ documents the `keiyoushi { }` build DSL and the `KeiSource` API used here.
 
 ## Credits
 
-The build tooling (`gradle/`, `core/`, `compiler/`, `common/`) is adapted from
+The build tooling (`gradle/`, `core/`, `compiler/`, `common/`), `lib/` and the 漫画柜 extension are
+adapted from
 [keiyoushi/extensions-source](https://github.com/keiyoushi/extensions-source), licensed under the
 Apache License 2.0 (see [LICENSE-APACHE](LICENSE-APACHE)). Everything else is under the
 [MIT License](LICENSE).
