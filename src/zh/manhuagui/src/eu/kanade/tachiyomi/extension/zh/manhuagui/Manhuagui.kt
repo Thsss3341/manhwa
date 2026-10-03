@@ -396,10 +396,12 @@ abstract class Manhuagui :
 
     private fun titleLanguageSummary(language: TitleLanguage): String = when (language) {
         TitleLanguage.CHINESE -> language.label
-        TitleLanguage.CHINESE_WITH_ID -> "${language.label}\n打开漫画页面时查找MAL条目，在简介顶部显示「MAL：标题 (id:12345)」。" +
-            "把「id:12345」粘贴到MAL追踪的搜索框即可精确匹配。"
-        else -> "${language.label}\n打开漫画页面时改名为MAL上的标题，MAL追踪可直接搜索到；找不到MAL条目时保留中文标题。" +
-            "已收藏的漫画需在App设置→高级里开启「Update library manga titles to match source」，再下拉刷新该漫画。"
+        TitleLanguage.CHINESE_WITH_ID ->
+            "${language.label}\n打开漫画页面时查找MAL条目，在简介顶部显示「MAL：标题 (id:12345)」。" +
+                "把「id:12345」粘贴到MAL追踪的搜索框即可精确匹配。"
+        else ->
+            "${language.label}\n打开漫画页面时改名为MAL上的标题，MAL追踪可直接搜索到；找不到MAL条目时保留中文标题。" +
+                "已收藏的漫画需在App设置→高级里开启「Update library manga titles to match source」，再下拉刷新该漫画。"
     }
 
     private fun getShowR18(): Boolean = preferences.getBoolean(SHOW_R18_PREF, false)
