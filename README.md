@@ -34,6 +34,25 @@ has a 话 section, volumes and extras get no chapter number, so 第16卷 isn't t
 trackers. It keeps the same source id as Keiyoushi's build, so uninstall that one first;
 library entries carry over.
 
+### MAL tracking (漫画柜)
+
+MyAnimeList can't find 漫画柜's Chinese titles. In the extension settings, set **标题语言（方便MAL追踪）**:
+
+| Option | Effect |
+|--------|--------|
+| 中文（漫画柜原标题） | Default, nothing is looked up. |
+| 中文，简介里加上MAL ID | Keeps the Chinese title and adds `MAL：<title> (id:12345)` to the top of the description. Paste `id:12345` into the MAL tracker search for an exact match. |
+| 罗马音（MAL标题） / 英文 | Also renames the manga to MAL's romaji or English title, so the tracker search finds it as is. The Chinese title stays in the description. |
+
+When a manga's details load, the extension looks its Chinese title up on [Bangumi](https://bgm.tv)
+to get the original title (间谍过家家 → SPY×FAMILY), then on [AniList](https://anilist.co), which
+returns the MAL ID and MAL's titles. Only exact title matches count, so a manga that isn't found
+(often Chinese manhua, which MAL rarely lists) keeps its Chinese title. Results are cached; misses
+are retried after a week.
+
+Manga already in the library are only renamed if the app's **Update library manga titles to match
+source** setting is on (Settings → Advanced). Then pull down to refresh the manga.
+
 ## Adding the repo in Mihon
 
 In Mihon go to **Browse → Extensions → Extension repos → Add** and paste:

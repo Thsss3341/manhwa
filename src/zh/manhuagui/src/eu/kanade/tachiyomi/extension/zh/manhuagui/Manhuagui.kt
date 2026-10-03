@@ -50,6 +50,8 @@ abstract class Manhuagui :
 
     private val preferences: SharedPreferences by getPreferencesLazy()
 
+    private val malTitles by lazy { MalTitles(network.client, preferences) }
+
     private val imageServer = arrayOf("https://i.hamreus.com", "https://cf.hamreus.com")
     private val mobileWebsiteUrl: String
         get() = baseUrl.replace("www.", "m.").replace("tw.", "m.")
@@ -186,7 +188,7 @@ abstract class Manhuagui :
         return SManga.create().apply {
             parseDetails(document)
             this.url = "/comic/$id/"
-        }
+        }.also { applyMalTitle(it) }
     }
 
     @OptIn(DelicateCoroutinesApi::class)
@@ -224,9 +226,28 @@ abstract class Manhuagui :
             }
         }
 
-        manga.parseDetails(document)
+        // Only touch the details when asked: the app may apply them anyway, and a chapter-only
+        // update would otherwise put back the Chinese title of a manga renamed for MAL.
+        if (fetchDetails) {
+            manga.parseDetails(document)
+            applyMalTitle(manga)
+        }
 
         return SMangaUpdate(manga, parseChapterList(document))
+    }
+
+    private suspend fun applyMalTitle(manga: SManga) {
+        if (!malTitles.isEnabled) return
+        // Bangumi only knows Simplified Chinese titles, and the tw mirrors show Traditional ones.
+        val simplifiedTitle = if (baseUrl.toHttpUrl().host.startsWith("tw.")) {
+            runCatching {
+                client.get(baseUrl.replaceFirst("://tw.", "://www.") + manga.url).asJsoup()
+                    .selectFirst("div.book-title > h1")?.text()
+            }.getOrNull()
+        } else {
+            null
+        }
+        malTitles.apply(manga, simplifiedTitle ?: manga.title)
     }
 
     private fun SManga.parseDetails(document: Document) {
@@ -357,6 +378,28 @@ abstract class Manhuagui :
             summary = SHOW_R18_PREF_SUMMARY
             screen.addPreference(this)
         }
+
+        ListPreference(screen.context).run {
+            key = MalTitles.PREF_KEY_TITLE_LANGUAGE
+            title = "标题语言（方便MAL追踪）"
+            entries = TitleLanguage.entries.map { it.label }.toTypedArray()
+            entryValues = TitleLanguage.entries.map { it.name }.toTypedArray()
+            setDefaultValue(TitleLanguage.CHINESE.name)
+            summary = titleLanguageSummary(malTitles.titleLanguage)
+            setOnPreferenceChangeListener { _, value ->
+                summary = titleLanguageSummary(TitleLanguage.entries.first { it.name == value })
+                true
+            }
+            screen.addPreference(this)
+        }
+    }
+
+    private fun titleLanguageSummary(language: TitleLanguage): String = when (language) {
+        TitleLanguage.CHINESE -> language.label
+        TitleLanguage.CHINESE_WITH_ID -> "${language.label}\n打开漫画页面时查找MAL条目，在简介顶部显示「MAL：标题 (id:12345)」。" +
+            "把「id:12345」粘贴到MAL追踪的搜索框即可精确匹配。"
+        else -> "${language.label}\n打开漫画页面时改名为MAL上的标题，MAL追踪可直接搜索到；找不到MAL条目时保留中文标题。" +
+            "已收藏的漫画需在App设置→高级里开启「Update library manga titles to match source」，再下拉刷新该漫画。"
     }
 
     private fun getShowR18(): Boolean = preferences.getBoolean(SHOW_R18_PREF, false)
